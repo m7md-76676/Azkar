@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بث مباشر من الحرم المكي</title>
+  <style> 
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-image: url('https://i.postimg.cc/Fzn7yZJn/b60fd08b2b09c2feb5e6f087c4143edb.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5vh 3vw;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 6vw;
+  color: #ffd700;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #000;
+  font-family: 'Scheherazade', serif;
+}
+
+.player-container {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 2vw;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #000;
+  margin: auto;
+  max-width: 90vw;
+}
+
+iframe {
+  width: 100%;
+  height: 50vw;
+  max-height: 400px;
+  border: 3px solid #ffd700;
+  border-radius: 10px;
+}
+
+.hadith-box {
+  margin-top: 30px;
+  font-size: 1.5em;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1em;
+  border-radius: 15px;
+  display: inline-block;
+  max-width: 90%;
+}
+
+.decor img {
+  width: 80px;
+  margin: 0 10px;
+  opacity: 0.7;
+}
+
+/* قائمة جانبية */
+.menu-bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-bar.open {
+  transform: translateX(0);
+}
+
+.menu-bar ul {
+  list-style-type: none;
+  padding: 20px;
+}
+
+.menu-bar ul li {
+  padding: 10px 0;
+}
+
+.menu-bar ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ffd700;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 7vw;
+  }
+
+  iframe {
+    height: 55vw;
+  }
+
+  .hadith-box {
+    font-size: 1.1em;
+    width: 90%;
+  }
+
+  .decor img {
+    width: 60px;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- القائمة الجانبية -->
+  <!-- القائمة الجانبية -->
+<div class="menu-bar" id="menu-bar">
+  <ul>
+    <li><a id="live-link" href="qqqq.html">البث المباشر</a></li>
+    <li><a href="baqara.html">سورة البقرة</a></li>
+    <li><a href="azkar.html">الأذكار</a></li>
+    <li><a href="prayertime.html">أوقات الصلوات </a></li>
+    <li><a href="#">قريباَ...</a></li>
+  </ul>
+</div>
+
+  <!-- زر القائمة الجانبية -->
+  <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
+  <div class="overlay">
+    <h1>بث مباشر من الحرم المكي</h1>
+
+    <div class="player-container">
+      <iframe width="100%" height="auto"
+  src="https://www.youtube.com/embed/tJ-ZxAHgiQs?autoplay=1
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen>
+</iframe>
+    </div>
+ <div id="baqara" class="azkar-box" style="display: none;"> <!-- إخفاءه بشكل افتراضي -->
+  <h2>سورة البقرة</h2>
+  <p>استمع لسورة البقرة كاملة:</p>
+  <audio controls>
+    <source src="https://www.dropbox.com/scl/fi/j22bftxb8csscucgpejqh/3-1-The-Complete-Holy-Quran-Mohamed-Ayoub-128Kbps-44KHz-mp3.mp3?rlkey=2radb73in2h5o5jlh13ksm01c&st=mbkkzdvn&dl=0" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت.
+  </audio>
+</div>
+    
+    <div class="hadith-box" id="hadith-box">قال رسول الله ﷺ: "من سلك طريقًا يلتمس فيه علمًا، سهل الله له به طريقًا إلى الجنة".</div>
+
+    <div class="decor">
+      <img src="https://i.imgur.com/zyZoNid.png" alt="زخرفة إسلامية">
+      <img src="https://i.imgur.com/zyZoNid.png" alt="زخرفة إسلامية">
+    </div>
+  </div>
+
+  <script>
+    const ahadith = [
+      "قال رسول الله ﷺ: \"من سلك طريقًا يلتمس فيه علمًا، سهل الله له به طريقًا إلى الجنة\".",
+      "قال رسول الله ﷺ: \"خيركم من تعلم القرآن وعلّمه\".",
+      "قال رسول الله ﷺ: \"بلغوا عني ولو آية\".",
+      "قال رسول الله ﷺ: \"من دل على خير فله مثل أجر فاعله\".",
+      "قال رسول الله ﷺ: \"إن لله أهلين من الناس... أهل القرآن هم أهل الله وخاصته\".",
+      "قال رسول الله ﷺ: \"إن الذي ليس في جوفه شيء من القرآن كالبيت الخرب\".",
+      "قال رسول الله ﷺ: \"اقرؤوا القرآن فإنه يأتي يوم القيامة شفيعًا لأصحابه\".",
+      "قال رسول الله ﷺ: \"اقرؤوا سورة البقرة، فإن أخذها بركة، وتركها حسرة، ولا تستطيعها البطلة\". (رواه مسلم)",
+      "قال رسول الله ﷺ: \"إذا أيقظ الرجل أهله من الليل فصليا أو صلى ركعتين جميعًا، كُتبا في الذاكرين والذاكرات\". (رواه أبو داود بإسناد صحيح)"
+    ];
+
+    let hadithIndex = 0;
+    setInterval(() => {
+      hadithIndex = (hadithIndex + 1) % ahadith.length;
+      document.getElementById('hadith-box').textContent = ahadith[hadithIndex];
+    }, 10000);
+
+    function toggleMenu() {
+      const menu = document.getElementById('menu-bar');
+      menu.classList.toggle('open');
+    }
+  
+</script>
+  
+</script><script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const liveLink = document.getElementById("live-link");
+    liveLink.href = "https://www.youtube.com/live/tJ-ZxAHgiQs";
+    liveLink.textContent = "البث المباشر";
+  });
+</script>
+</body>
+</html>
