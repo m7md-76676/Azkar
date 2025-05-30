@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تكبيرات العيد</title>
+  <style>/* القائمة الجانبية */
+.menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  transition: right 0.3s ease;
+  z-index: 999;
+  padding-top: 60px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.menu a {
+  display: block;
+  color: #ffd700;
+  padding: 15px 20px;
+  text-decoration: none;
+  font-size: 18px;
+  border-bottom: 1px solid #444;
+  transition: background 0.3s;
+}
+
+.menu a:hover {
+  background-color: #111;
+}
+
+.menu.open {
+  right: 0;
+}
+
+/* زر القائمة */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1000;
+  color: #ffd700;
+  background: none;
+  border: none;
+}
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-image: url('https://i.postimg.cc/Fzn7yZJn/b60fd08b2b09c2feb5e6f087c4143edb.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color: #fff;
+      text-align: center;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 5vh 3vw;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 6vw;
+      color: #ffd700;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #000;
+      font-family: 'Scheherazade', serif;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    .controls {
+      margin-top: 15px;
+    }
+
+    .controls button {
+      margin: 5px;
+      padding: 10px 20px;
+      background-color: #ffd700;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #000;
+    }
+
+    .controls button:hover {
+      background-color: #e0c200;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 2em;
+      margin-top: 30px;
+    }
+
+    /* القائمة الجانبية */
+    .menu {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #222;
+      transition: right 0.3s ease;
+      z-index: 999;
+      padding-top: 60px;
+    }
+
+    .menu a {
+      display: block;
+      color: #fff;
+      padding: 15px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .menu a:hover {
+      background-color: #444;
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 1000;
+      color: #ffd700;
+    }
+
+    .menu.open {
+      right: 0;
+    }
+  </style>
+</head>
+<body><!-- زر القائمة الجانبية -->
+<div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
+<!-- القائمة الجانبية -->
+<div class="menu" id="sideMenu">
+  <a href="qqqq.html">البث المباشر</a>
+  <a href="baqara.html">سورة البقرة</a>
+  <a href="azkar.html">الأذكار</a>
+  <a href="prayertime.html">أوقات الصلوات</a>
+  <a href="takbeerat.html">تكبيرات العيد</a>
+</div>
+
+  <!-- زر القائمة -->
+  <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
+  <!-- القائمة الجانبية -->
+  <div class="menu" id="sideMenu">
+    <a href="qqqq.html">البث المباشر</a>
+    <a href="baqara.html">سورة البقرة</a>
+    <a href="azkar.html">الأذكار</a>
+    <a href="prayertime.html">أوقات الصلوات</a>
+    <a href="takbeerat.html">تكبيرات العيد</a>
+  </div>
+
+  <div class="overlay">
+    <h1>🕌 تكبيرات عيد الأضحى وعيد الفطر</h1>
+
+    <div class="audio-container">
+      <h2>استمع للتكبيرات:</h2>
+      <audio id="audio" src="https://www.dropbox.com/scl/fi/dm2p3hw207zkxqcsb39px/128Kbps-44KHz.m4a?rlkey=k9c4evi34vgu6vv3u7wdn37ib&raw=1" controls></audio>
+      <div class="controls">
+        <button onclick="togglePlay()">تشغيل / إيقاف</button>
+        <button onclick="toggleLoop()">تكرار: <span id="loopState">إيقاف</span></button>
+      </div>
+    </div>
+
+    <p>
+      الله أكبر، الله أكبر، الله أكبر لا إله إلا الله،<br>
+      الله أكبر، الله أكبر ولله الحمد.<br><br>
+
+      الله أكبر كبيرًا، والحمد لله كثيرًا،<br>
+      وسبحان الله بكرة وأصيلاً.<br><br>
+
+      لا إله إلا الله وحده، صدق وعده، ونصر عبده،<br>
+      وأعز جنده، وهزم الأحزاب وحده.
+    </p>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('open');
+    }
+
+    const audio = document.getElementById('audio');
+    const loopLabel = document.getElementById('loopState');
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+
+    function toggleLoop() {
+      audio.loop = !audio.loop;
+      loopLabel.textContent = audio.loop ? 'تشغيل' : 'إيقاف';
+    }
+  </script>
+<script>
+  function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("open");
+  }
+</script>
+</body>
+</html>
