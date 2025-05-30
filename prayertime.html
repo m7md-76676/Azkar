@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>أوقات الصلاة</title>
   <style>
     body {
@@ -10,14 +10,13 @@
       font-family: 'Arial', sans-serif;
       background-color: #1a1a1a;
       color: #fff;
-      text-align: center;
-      padding-right: 0;
     }
 
     .overlay {
       background-color: rgba(0, 0, 0, 0.7);
       padding: 5vh 3vw;
       min-height: 100vh;
+      padding-top: 80px;
     }
 
     h1 {
@@ -28,49 +27,65 @@
       font-family: 'Scheherazade', serif;
     }
 
-    /* القائمة الجانبية */
-    .menu-bar {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 250px;
-      height: 100%;
-      background-color: #333;
-      color: #fff;
-      transform: translateX(100%);
-      transition: transform 0.3s ease-in-out;
-      padding-top: 60px;
-    }
-
-    .menu-bar.open {
-      transform: translateX(0);
-    }
-
-    .menu-bar ul {
-      list-style-type: none;
-      padding: 20px;
-    }
-
-    .menu-bar ul li {
-      padding: 10px 0;
-    }
-
-    .menu-bar ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
-
+    /* القائمة الجانبية الجديدة */
     .menu-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 999;
-      cursor: pointer;
       font-size: 30px;
       color: #ffd700;
+      cursor: pointer;
+      z-index: 1001;
     }
 
-    /* باقي التنسيق */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #111;
+      padding-top: 60px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+
+    .side-menu.open {
+      right: 0;
+    }
+
+    .side-menu .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      color: #ffd700;
+      cursor: pointer;
+    }
+
+    .side-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .side-menu ul li {
+      padding: 15px 20px;
+      border-bottom: 1px solid #333;
+    }
+
+    .side-menu ul li a {
+      color: #ffd700;
+      text-decoration: none;
+      font-size: 18px;
+      display: block;
+    }
+
+    .side-menu ul li a:hover {
+      color: #fff;
+    }
+
+    /* باقي تنسيق الصفحة */
     .time-box {
       background-color: #333;
       padding: 15px;
@@ -85,6 +100,18 @@
       color: #ffd700;
     }
 
+    .hadith {
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #222;
+      border-radius: 10px;
+      color: #fff;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 6vw;
@@ -93,113 +120,108 @@
   </style>
 </head>
 <body>
-  <!-- زر القائمة الجانبية -->
-  <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
 
-  <!-- القائمة الجانبية -->
-  <div class="menu-bar" id="menu-bar">
-    <ul>
-      <li><a href="index.html">البث المباشر</a></li>
-      <li><a href="baqara.html">سورة البقرة</a></li>
-      <li><a href="azkar.html">الاذكار</a></li>
-      <li><a href="prayertime.html">اوقات الصلوات</a></li>
-      <li><a href="takbeerat.html">تكبيرات العيد</a></li>
-    </ul>
+<!-- زر القائمة الجانبية -->
+<div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
+<!-- القائمة الجانبية الجديدة -->
+<div class="side-menu" id="sideMenu">
+  <div class="close-btn" onclick="toggleMenu()">&times;</div>
+  <ul>
+    <li><a href="index.html">البث المباشر</a></li>
+    <li><a href="baqara.html">سورة البقرة</a></li>
+    <li><a href="azkar.html">الأذكار</a></li>
+    <li><a href="prayertime.html">أوقات الصلوات</a></li>
+    <li><a href="takbeerat.html">تكبيرات العيد</a></li>
+  </ul>
+</div>
+
+<div class="overlay">
+  <h1>أوقات الصلاة</h1>
+  <div class="current-time" id="current-time"></div>
+  <div class="hijri-date" id="hijri-date"></div>
+  <div id="cities-container"></div>
+  <div class="countdown" id="countdown"></div>
+
+  <div class="hadith">
+    <p>الفراغ نعمة الله، وما أكثر من ضيع هذه النعمة! ففي صحيح البخاري عن ابن عباس ـ رضي الله عنهما ـ قال: قال النبي صلى الله عليه وسلم: <strong>نعمتان مغبون فيهما كثير من الناس: الصحة، والفراغ.</strong></p>
+    <p>والمرء مسؤول عن وقته بين يدي الله يوم القيامة، كما في الحديث: <strong>لا تزول قدما عبد يوم القيامة، حتى يسأل عن عمره فيما أفناه</strong> .. أخرجه الترمذي، وقال: حسن صحيح.</p>
+    <p>قال رسولُ اللهِ صلَّى اللهُ عليه وسلَّم لرجلٍ وهو يَعِظُه: <strong>اغتنِمْ خمسًا قبل خمسٍ: شبابَك قبل هَرَمِك، وصِحَّتَك قبل سَقَمِك، وغناك قبل فقرِك، وفراغَك قبل شُغلِك، وحياتَك قبل موتِك.</strong></p>
   </div>
+</div>
 
-  <div class="overlay">
-    <h1>أوقات الصلاة</h1>
-    <div class="current-time" id="current-time"></div>
-    <div class="hijri-date" id="hijri-date"></div>
-    <div id="cities-container"></div>
-    <div class="countdown" id="countdown"></div>
-  </div>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("sideMenu");
+    menu.classList.toggle("open");
+  }
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('menu-bar');
-      menu.classList.toggle('open');
+  const cities = [{ name: "خميس مشيط", city: "Khamis Mushait" }];
+  const method = 4;
+
+  function formatTime12Hour(time24) {
+    const [hourStr, minute] = time24.split(':');
+    let hour = parseInt(hourStr, 10);
+    const period = hour >= 12 ? 'م' : 'ص';
+    hour = hour % 12 || 12;
+    return `${hour}:${minute} ${period}`;
+  }
+
+  async function fetchPrayerTimes(city) {
+    const response = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Saudi%20Arabia&method=${method}`);
+    const data = await response.json();
+    return data.data;
+  }
+
+  function displayPrayerTimes(cityName, timings) {
+    const container = document.getElementById('cities-container');
+    container.innerHTML = '';
+    const cityBox = document.createElement('div');
+    cityBox.className = "time-box";
+
+    const title = document.createElement('h3');
+    title.style.color = '#ffd700';
+    title.textContent = cityName;
+    cityBox.appendChild(title);
+
+    const prayerNames = {
+      Fajr: "الفجر",
+      Sunrise: "الشروق",
+      Dhuhr: "الظهر",
+      Asr: "العصر",
+      Maghrib: "المغرب",
+      Isha: "العشاء"
+    };
+
+    for (const [key, label] of Object.entries(prayerNames)) {
+      const time = formatTime12Hour(timings[key]);
+      const p = document.createElement('p');
+      p.textContent = `${label}: ${time}`;
+      cityBox.appendChild(p);
     }
 
-    // باقي السكربتات الخاصة بأوقات الصلاة، التاريخ الهجري، وعداد الوقت
-    const cities = [{ name: "خميس مشيط", city: "Khamis Mushait" }];
-    const method = 4;
+    container.appendChild(cityBox);
+  }
 
-    function formatTime12Hour(time24) {
-      const [hourStr, minute] = time24.split(':');
-      let hour = parseInt(hourStr, 10);
-      const period = hour >= 12 ? 'م' : 'ص';
-      hour = hour % 12 || 12;
-      return `${hour}:${minute} ${period}`;
-    }
+  function updateCurrentTime() {
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    let seconds = now.getSeconds().toString().padStart(2, '0');
+    const period = hours >= 12 ? 'م' : 'ص';
+    hours = hours % 12 || 12;
+    document.getElementById('current-time').textContent = `الساعة الآن: ${hours}:${minutes}:${seconds} ${period}`;
+  }
 
-    async function fetchPrayerTimes(city) {
-      const response = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Saudi%20Arabia&method=${method}`);
-      const data = await response.json();
-      return data.data;
-    }
+  async function displayHijriDate() {
+    const today = new Date().toISOString().split('T')[0];
+    const response = await fetch(`https://api.aladhan.com/v1/gToH?date=${today}`);
+    const data = await response.json();
+    const hijri = data.data.hijri;
+    const hijriDate = `${hijri.day} ${hijri.month.ar} ${hijri.year}`;
+    document.getElementById('hijri-date').textContent = `التاريخ الهجري: ${hijriDate}`;
+  }
 
-    function displayPrayerTimes(cityName, timings) {
-      const container = document.getElementById('cities-container');
-      container.innerHTML = '';
-      const cityBox = document.createElement('div');
-      cityBox.className = "time-box";
-
-      const title = document.createElement('h3');
-      title.style.color = '#ffd700';
-      title.textContent = cityName;
-      cityBox.appendChild(title);
-
-      const prayerNames = {
-        Fajr: "الفجر",
-        Sunrise: "الشروق",
-        Dhuhr: "الظهر",
-        Asr: "العصر",
-        Maghrib: "المغرب",
-        Isha: "العشاء"
-      };
-
-      for (const [key, label] of Object.entries(prayerNames)) {
-        const time = formatTime12Hour(timings[key]);
-        const p = document.createElement('p');
-        p.textContent = `${label}: ${time}`;
-        cityBox.appendChild(p);
-      }
-
-      container.appendChild(cityBox);
-    }
-
-    function updateCurrentTime() {
-      const now = new Date();
-      let hours = now.getHours();
-      let minutes = now.getMinutes().toString().padStart(2, '0');
-      let seconds = now.getSeconds().toString().padStart(2, '0');
-      const period = hours >= 12 ? 'م' : 'ص';
-      hours = hours % 12 || 12;
-      document.getElementById('current-time').textContent = `الساعة الآن: ${hours}:${minutes}:${seconds} ${period}`;
-    }
-
-    async function displayHijriDate() {
-      const today = new Date().toISOString().split('T')[0];
-      const response = await fetch(`https://api.aladhan.com/v1/gToH?date=${today}`);
-      const data = await response.json();
-      const hijri = data.data.hijri;
-      const hijriDate = `${hijri.day} ${hijri.month.ar} ${hijri.year}`;
-      document.getElementById('hijri-date').textContent = `التاريخ الهجري: ${hijriDate}`;
-    }
-
-    async function initPrayerTimes() {
-      const data = await fetchPrayerTimes(cities[0].city);
-      displayPrayerTimes(cities[0].name, data.timings);
-      displayHijriDate();
-    }
-
-    updateCurrentTime();
-    setInterval(updateCurrentTime, 1000);
-    initPrayerTimes();
-    setInterval(initPrayerTimes, 60 * 1000); // تحديث كل دقيقة
-  </script>
-   <script>
   function getNextPrayerTime(timings) {
     const now = new Date();
     const prayers = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
@@ -213,7 +235,6 @@
       }
     }
 
-    // إذا انتهت كل الصلوات، نرجع الفجر لليوم التالي
     const fajrParts = timings['Fajr'].split(':');
     const nextFajr = new Date();
     nextFajr.setDate(now.getDate() + 1);
@@ -250,16 +271,18 @@
     }, 1000);
   }
 
-  async function setupCountdown() {
-    const city = "Khamis Mushait"; // غيّر المدينة إذا تبي
-    const response = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Saudi%20Arabia&method=4`);
-    const data = await response.json();
-    const timings = data.data.timings;
-    const nextPrayer = getNextPrayerTime(timings);
+  async function initPrayerTimes() {
+    const data = await fetchPrayerTimes(cities[0].city);
+    displayPrayerTimes(cities[0].name, data.timings);
+    displayHijriDate();
+    const nextPrayer = getNextPrayerTime(data.timings);
     updateCountdown(nextPrayer);
   }
 
-  setupCountdown();
+  updateCurrentTime();
+  setInterval(updateCurrentTime, 1000);
+  initPrayerTimes();
+  setInterval(initPrayerTimes, 60000);
 </script>
 </body>
 </html>
