@@ -63,45 +63,48 @@ iframe {
   opacity: 0.7;
 }
 
-/* قائمة جانبية */
-.menu-bar {
+/* قائمة جانبية احترافية */
+.menu {
   position: fixed;
   top: 0;
-  right: 0;
+  right: -250px;
   width: 250px;
   height: 100%;
-  background-color: #333;
-  color: #fff;
-  transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.9);
+  transition: right 0.3s ease;
+  z-index: 999;
+  padding-top: 60px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
 }
 
-.menu-bar.open {
-  transform: translateX(0);
-}
-
-.menu-bar ul {
-  list-style-type: none;
-  padding: 20px;
-}
-
-.menu-bar ul li {
-  padding: 10px 0;
-}
-
-.menu-bar ul li a {
-  color: #fff;
+.menu a {
+  display: block;
+  color: #ffd700;
+  padding: 15px 20px;
   text-decoration: none;
+  font-size: 18px;
+  border-bottom: 1px solid #444;
+  transition: background 0.3s;
+}
+
+.menu a:hover {
+  background-color: #111;
+}
+
+.menu.open {
+  right: 0;
 }
 
 .menu-toggle {
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 999;
-  cursor: pointer;
   font-size: 30px;
+  cursor: pointer;
+  z-index: 1000;
   color: #ffd700;
+  background: none;
+  border: none;
 }
 
 @media (max-width: 600px) {
@@ -124,95 +127,57 @@ iframe {
 }
   </style>
 </head>
-<body> <!-- Default Statcounter code for بث الحرم
-https://m7md-76676.github.io/Azkar/ -->
-<script type="text/javascript">
-var sc_project=13135916; 
-var sc_invisible=1; 
-var sc_security="77235b59"; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js" async></script>
-<noscript><div class="statcounter"><a title="web counter"
-href="https://statcounter.com/" target="_blank"><img class="statcounter"
-src="https://c.statcounter.com/13135916/0/77235b59/1/" alt="web counter"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-<!-- End of Statcounter Code -->
-  <!-- القائمة الجانبية -->
-  <!-- القائمة الجانبية -->
-<div class="menu-bar" id="menu-bar">
-  <ul>
-    <li><a id="live-link" href="index.html">البث المباشر</a></li>
-    <li><a href="baqara.html">سورة البقرة</a></li>
-    <li><a href="azkar.html">الأذكار</a></li>
-    <li><a href="prayertime.html">أوقات الصلوات </a></li>
-    <li><a href="takbeerat.html">تكبيرات العيد</a></li>
-  </ul>
+<body>
+
+<!-- زر القائمة -->
+<div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
+<!-- القائمة الجانبية -->
+<div class="menu" id="sideMenu">
+  <a href="index.html">البث المباشر</a>
+  <a href="baqara.html">سورة البقرة</a>
+  <a href="azkar.html">الأذكار</a>
+  <a href="prayertime.html">أوقات الصلوات</a>
+  <a href="takbeerat.html">تكبيرات العيد</a>
 </div>
 
-  <!-- زر القائمة الجانبية -->
-  <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+<div class="overlay">
+  <h1>بث مباشر من الحرم المكي</h1>
 
-  <div class="overlay">
-    <h1>بث مباشر من الحرم المكي</h1>
-
-    <div class="player-container">
-      <iframe width="100%" height="auto"
-  src="https://www.youtube.com/embed/tJ-ZxAHgiQs?autoplay=1
-  frameborder="0"
-  allow="autoplay; encrypted-media"
-  allowfullscreen>
-</iframe>
-    </div>
- <div id="baqara" class="azkar-box" style="display: none;"> <!-- إخفاءه بشكل افتراضي -->
-  <h2>سورة البقرة</h2>
-  <p>استمع لسورة البقرة كاملة:</p>
-  <audio controls>
-    <source src="https://www.dropbox.com/scl/fi/j22bftxb8csscucgpejqh/3-1-The-Complete-Holy-Quran-Mohamed-Ayoub-128Kbps-44KHz-mp3.mp3?rlkey=2radb73in2h5o5jlh13ksm01c&st=mbkkzdvn&dl=0" type="audio/mpeg">
-    متصفحك لا يدعم تشغيل الصوت.
-  </audio>
-</div>
-    
-    <div class="hadith-box" id="hadith-box">قال رسول الله ﷺ: "من سلك طريقًا يلتمس فيه علمًا، سهل الله له به طريقًا إلى الجنة".</div>
-
-    <div class="decor">
-      <img src="https://i.imgur.com/zyZoNid.png" alt="زخرفة إسلامية">
-      <img src="https://i.imgur.com/zyZoNid.png" alt="زخرفة إسلامية">
-    </div>
+  <div class="player-container">
+    <iframe src="https://www.youtube.com/embed/tJ-ZxAHgiQs?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 
-  <script>
-    const ahadith = [
-      "قال رسول الله ﷺ: \"من سلك طريقًا يلتمس فيه علمًا، سهل الله له به طريقًا إلى الجنة\".",
-      "قال رسول الله ﷺ: \"خيركم من تعلم القرآن وعلّمه\".",
-      "قال رسول الله ﷺ: \"بلغوا عني ولو آية\".",
-      "قال رسول الله ﷺ: \"من دل على خير فله مثل أجر فاعله\".",
-      "قال رسول الله ﷺ: \"إن لله أهلين من الناس... أهل القرآن هم أهل الله وخاصته\".",
-      "قال رسول الله ﷺ: \"إن الذي ليس في جوفه شيء من القرآن كالبيت الخرب\".",
-      "قال رسول الله ﷺ: \"اقرؤوا القرآن فإنه يأتي يوم القيامة شفيعًا لأصحابه\".",
-      "قال رسول الله ﷺ: \"اقرؤوا سورة البقرة، فإن أخذها بركة، وتركها حسرة، ولا تستطيعها البطلة\". (رواه مسلم)",
-      "قال رسول الله ﷺ: \"إذا أيقظ الرجل أهله من الليل فصليا أو صلى ركعتين جميعًا، كُتبا في الذاكرين والذاكرات\". (رواه أبو داود بإسناد صحيح)"
-    ];
+  <div class="hadith-box" id="hadith-box">قال رسول الله ﷺ: "من سلك طريقًا يلتمس فيه علمًا، سهل الله له به طريقًا إلى الجنة".</div>
 
-    let hadithIndex = 0;
-    setInterval(() => {
-      hadithIndex = (hadithIndex + 1) % ahadith.length;
-      document.getElementById('hadith-box').textContent = ahadith[hadithIndex];
-    }, 10000);
+  <div class="decor">
+    <img src="https://i.imgur.com/zyZoNid.png" alt="زخرفة إسلامية">
+    <img src="https://i.imgur.com/zyZoNid.png" alt="زخرفة إسلامية">
+  </div>
+</div>
 
-    function toggleMenu() {
-      const menu = document.getElementById('menu-bar');
-      menu.classList.toggle('open');
-    }
-  
-</script>
-  
-</script><script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const liveLink = document.getElementById("live-link");
-    liveLink.href = "https://www.youtube.com/live/tJ-ZxAHgiQs";
-    liveLink.textContent = "البث المباشر";
-  });
+<script>
+  function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("open");
+  }
+
+  const ahadith = [
+    "قال رسول الله ﷺ: \"من سلك طريقًا يلتمس فيه علمًا، سهل الله له به طريقًا إلى الجنة\".",
+    "قال رسول الله ﷺ: \"خيركم من تعلم القرآن وعلّمه\".",
+    "قال رسول الله ﷺ: \"بلغوا عني ولو آية\".",
+    "قال رسول الله ﷺ: \"من دل على خير فله مثل أجر فاعله\".",
+    "قال رسول الله ﷺ: \"إن لله أهلين من الناس... أهل القرآن هم أهل الله وخاصته\".",
+    "قال رسول الله ﷺ: \"إن الذي ليس في جوفه شيء من القرآن كالبيت الخرب\".",
+    "قال رسول الله ﷺ: \"اقرؤوا القرآن فإنه يأتي يوم القيامة شفيعًا لأصحابه\".",
+    "قال رسول الله ﷺ: \"اقرؤوا سورة البقرة، فإن أخذها بركة، وتركها حسرة، ولا تستطيعها البطلة\". (رواه مسلم)",
+    "قال رسول الله ﷺ: \"إذا أيقظ الرجل أهله من الليل فصليا أو صلى ركعتين جميعًا، كُتبا في الذاكرين والذاكرات\". (رواه أبو داود بإسناد صحيح)"
+  ];
+
+  let hadithIndex = 0;
+  setInterval(() => {
+    hadithIndex = (hadithIndex + 1) % ahadith.length;
+    document.getElementById('hadith-box').textContent = ahadith[hadithIndex];
+  }, 10000);
 </script>
 </body>
 </html>
