@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>سورة البقرة</title>
   <style>
     body {
@@ -20,8 +20,6 @@
       background-color: rgba(0, 0, 0, 0.7);
       padding: 5vh 3vw;
       min-height: 100vh;
-      position: relative;
-      z-index: 1; /* Ensure content is above background */
     }
 
     h1 {
@@ -33,104 +31,169 @@
     }
 
     .audio-container {
-      text-align: center;
+      background-color: rgba(255, 255, 255, 0.08);
+      padding: 2vw;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #000;
+      margin: auto;
+      max-width: 90vw;
       margin-top: 20px;
-      z-index: 2; /* Ensure the audio controls stay above other content */
     }
 
     audio {
       width: 100%;
       max-width: 600px;
-      margin-top: 20px;
+      margin-top: 10px;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .play-pause-btn {
+      margin-top: 15px;
+      background-color: #ffd700;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 25px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .play-pause-btn:hover {
+      background-color: #e6c200;
     }
 
     .description {
       margin-top: 20px;
       font-size: 1.1em;
+      max-width: 90vw;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1em;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #000;
     }
 
-    /* قائمة جانبية */
-    .menu-bar {
+    /* القائمة الجانبية على شكل من مثال الحرم */
+    .menu {
       position: fixed;
       top: 0;
-      right: 0;
+      right: -250px;
       width: 250px;
       height: 100%;
-      background-color: #333;
-      color: #fff;
-      transform: translateX(100%);
-      transition: transform 0.3s ease-in-out;
-      z-index: 999; /* Make sure the menu bar stays above content */
+      background-color: rgba(0, 0, 0, 0.9);
+      transition: right 0.3s ease;
+      z-index: 999;
+      padding-top: 60px;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
     }
 
-    .menu-bar.open {
-      transform: translateX(0);
-    }
-
-    .menu-bar ul {
-      list-style-type: none;
-      padding: 20px;
-    }
-
-    .menu-bar ul li {
-      padding: 10px 0;
-    }
-
-    .menu-bar ul li a {
-      color: #fff;
+    .menu a {
+      display: block;
+      color: #ffd700;
+      padding: 15px 20px;
       text-decoration: none;
+      font-size: 18px;
+      border-bottom: 1px solid #444;
+      transition: background 0.3s;
+    }
+
+    .menu a:hover {
+      background-color: #111;
+    }
+
+    .menu.open {
+      right: 0;
     }
 
     .menu-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 999;
-      cursor: pointer;
       font-size: 30px;
+      cursor: pointer;
+      z-index: 1000;
       color: #ffd700;
+      background: none;
+      border: none;
+      user-select: none;
+      text-shadow: 0 0 7px #000;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 7vw;
+      }
+      .audio-container {
+        padding: 3vw;
+      }
+      .description {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- القائمة الجانبية -->
-  <div class="menu-bar" id="menu-bar">
-    <ul>
-      <li><a href="index.html">البث المباشر</a></li>
-      <li><a href="baqara.html">سورة البقرة</a></li>
-      <li><a href="azkar.html">الأذكار</a></li>
-      <li><a href="prayertime.html">أوقات الصلوات</a></li>
-      <li><a href="takbeerat.html">تكبيرات العيد</a></li>
-    </ul>
-  </div>
+  <!-- زر القائمة -->
+  <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
 
-  <!-- زر القائمة الجانبية -->
-  <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+  <!-- القائمة الجانبية -->
+  <nav class="menu" id="sideMenu">
+    <a href="index.html">البث المباشر</a>
+    <a href="baqara.html">سورة البقرة</a>
+    <a href="azkar.html">الأذكار</a>
+    <a href="prayertime.html">أوقات الصلوات</a>
+    <a href="takbeerat.html">تكبيرات العيد</a>
+  </nav>
 
   <div class="overlay">
     <h1>سورة البقرة</h1>
 
-    <!-- محتوى سورة البقرة -->
     <div class="audio-container">
       <h2>استمع لسورة البقرة كاملة:</h2>
-      <audio controls>
-        <source src="https://server14.mp3quran.net/mousa/Rewayat-Hafs-A-n-Assem/002.mp3" type="audio/mpeg">
+      <audio id="audioPlayer" controls>
+        <source src="https://server14.mp3quran.net/mousa/Rewayat-Hafs-A-n-Assem/002.mp3" type="audio/mpeg" />
         متصفحك لا يدعم تشغيل الصوت.
       </audio>
+      <button class="play-pause-btn" id="playPauseBtn">إيقاف</button>
     </div>
 
-    <!-- وصف سورة البقرة -->
     <div class="description">
-      <p>سورة البقرة هي أطول سور القرآن الكريم، وهي السورة رقم 2 في ترتيب المصحف الشريف. تتضمن السورة العديد من الأحكام الشرعية، وتعالج قضايا متعددة تتعلق بالعقيدة، والمجتمع، والأسرة، والشريعة. وقد ورد في الحديث الشريف أن من قرأ سورة البقرة في بيته لم يدخل الشيطان بيته لمدة ثلاث ليال.</p>
+      <p>
+        سورة البقرة هي أطول سور القرآن الكريم، وهي السورة رقم 2 في ترتيب المصحف الشريف. تتضمن السورة العديد من الأحكام الشرعية، وتعالج قضايا متعددة تتعلق بالعقيدة، والمجتمع، والأسرة، والشريعة. وقد ورد في الحديث الشريف أن من قرأ سورة البقرة في بيته لم يدخل الشيطان بيته لمدة ثلاث ليال.
+      </p>
     </div>
   </div>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById('menu-bar');
-      menu.classList.toggle('open');
+      document.getElementById('sideMenu').classList.toggle('open');
     }
+
+    const audio = document.getElementById('audioPlayer');
+    const btn = document.getElementById('playPauseBtn');
+
+    btn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = 'إيقاف';
+      } else {
+        audio.pause();
+        btn.textContent = 'تشغيل';
+      }
+    });
+
+    // تحديث الزر تلقائيًا لو المستخدم استخدم أدوات تحكم الصوت الأصلية
+    audio.addEventListener('play', () => {
+      btn.textContent = 'إيقاف';
+    });
+    audio.addEventListener('pause', () => {
+      btn.textContent = 'تشغيل';
+    });
   </script>
 
 </body>
